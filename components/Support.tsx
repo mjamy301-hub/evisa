@@ -19,9 +19,9 @@ const Support = () => {
               <g
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-miterlimit="10"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
                 strokeWidth="1"
               >
                 <path d="M22.5 10v13.5H.5V10m3-2l-3 2m22 0l-3-2" />
