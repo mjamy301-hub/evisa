@@ -11,14 +11,11 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <MainNav />
-      <SecondaryNav />
       <Hero />
       <Service />
       {/* <AvailableService /> */}
       <Yellow />
       <Support />
-      <Footer />
     </div>
   );
 }
