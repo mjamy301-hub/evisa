@@ -4,21 +4,25 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import Step1Form from "@/components/forms/Step1Form";
+import { useMe } from "@/hooks/useMe";
 
 const steps = [
   { id: 1, title: "Travel purpose" },
   {
     id: 2,
-    title: "Personal data",
+    title: "Personal data"
   },
   { id: 3, title: "Travel documents" },
   { id: 4, title: "Visa information" },
   { id: 5, title: "Add documents" },
-  { id: 6, title: "Fees" },
+  { id: 6, title: "Fees" }
 ];
 
 export default function VisaD() {
   const [currentStep, setCurrentStep] = useState(1);
+  const { me } = useMe();
+
+  console.log("me", me);
 
   const nextStep = () => {
     if (currentStep < steps.length) {
@@ -40,9 +44,7 @@ export default function VisaD() {
 
   return (
     <div className="container mx-auto px-5 pt-10 pb-27.5">
-      <h1 className="text-default text-5xl text-center font-bold mb-20">
-        Application for visa type D
-      </h1>
+      <h1 className="text-default text-5xl text-center font-bold mb-20">Application for visa type D</h1>
       <div>
         <div className="flex items-center justify-between mb-10 max-w-2xl mx-auto relative sm:left-10">
           {steps.map((step, index) => (
@@ -61,15 +63,9 @@ export default function VisaD() {
                       : "bg-white border-4 border-[#4a90e2]"
                   }`}
                 >
-                  {step.id < currentStep && (
-                    <Check className="w-4 text-blue-500" />
-                  )}
+                  {step.id < currentStep && <Check className="w-4 text-blue-500" />}
                 </div>
-                {index < steps.length - 1 && (
-                  <div
-                    className={`flex-1 h-1 transition-all duration-200 bg-[#4a90e2]`}
-                  />
-                )}
+                {index < steps.length - 1 && <div className={`flex-1 h-1 transition-all duration-200 bg-[#4a90e2]`} />}
               </div>
               {/* Step Label */}
               <div className="mt-4 h-30 hidden sm:block">
@@ -91,11 +87,7 @@ export default function VisaD() {
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center">
         {currentStep > 1 && (
-          <Button
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className="h-[44px] font-bold"
-          >
+          <Button onClick={prevStep} disabled={currentStep === 1} className="h-[44px] font-bold">
             Previous step
           </Button>
         )}

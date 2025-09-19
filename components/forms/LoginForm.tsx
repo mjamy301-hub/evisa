@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import signinIcon from "@/assets/sign-in.svg";
 import clsx from "clsx";
+import { useMe } from "@/hooks/useMe";
 
 const LoginForm = () => {
   const [username, setU] = useState("");
@@ -16,6 +17,7 @@ const LoginForm = () => {
   const [passwordShow, setPasswordShow] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { refreshMe } = useMe();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,13 +33,15 @@ const LoginForm = () => {
     });
     const data = await res.json();
 
-    if (res.ok) {
-      const next = searchParams.get("next");
-      router.replace(next ?? "/");
-    } else {
+    if (!res.ok) {
       const error = data.error;
       setError(error);
+      return;
     }
+
+    await refreshMe();
+    const next = searchParams.get("next");
+    router.replace(next ?? "/");
   }
 
   return (

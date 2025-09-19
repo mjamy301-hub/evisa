@@ -1,6 +1,7 @@
 import AvailableService from "@/components/AvailableService";
 import Footer from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import LoadMe from "@/components/LoadMe";
 import MainNav from "@/components/MainNav";
 import SecondaryNav from "@/components/SecondaryNav";
 import Service from "@/components/Service";
@@ -16,6 +17,7 @@ export default function Home() {
       {/* <AvailableService /> */}
       <Yellow />
       <Support />
+      <LoadMe />
     </div>
   );
 }
