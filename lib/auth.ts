@@ -10,9 +10,21 @@ export type JwtPayload = { id: string; role: "ADMIN" | "USER" };
 
 export async function login(username: string, password: string) {
   const user = await prisma.user.findUnique({ where: { Username: username } });
-  if (!user) return null;
+  if (!user)
+    return {
+      error: {
+        username: "Username and password does not match",
+        password: "Username and password does not match"
+      }
+    };
   const ok = await bcrypt.compare(password, user.PasswordHash);
-  if (!ok) return null;
+  if (!ok)
+    return {
+      error: {
+        username: "Username and password does not match",
+        password: "Username and password does not match"
+      }
+    };
   const payload: JwtPayload = { id: user.Id.toString(), role: user.Role };
   const token = await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
