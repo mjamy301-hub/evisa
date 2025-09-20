@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import Step1Form from "@/components/forms/Step1Form";
+import Step2Form from "@/components/forms/Step2Form";
 
 const steps = [
   { id: 1, title: "Travel purpose" },
@@ -86,8 +87,13 @@ export default function VisaD() {
         </div>
       </div>
 
-      <div className="px-20">{currentStep === 1 && <Step1Form />}</div>
-
+      <div className="px-20">
+        {currentStep === 1 && <Step1Form />}{" "}
+        {currentStep === 2 && <Step2Form />}
+      </div>
+      <p className="mt-25 mb-15 text-sm text-default">
+        All fields marked with * are mandatory
+      </p>
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center">
         {currentStep > 1 && (
