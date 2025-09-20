@@ -18,49 +18,77 @@ enum Role {
   USER
 }
 
-enum ApplicationStatus { 
-  NEW 
-  IN_PROGRESS 
-  SUBMITTED 
-  APPROVED 
-  REJECTED 
-  ON_HOLD 
+enum ApplicationStatus {
+  NEW
+  IN_PROGRESS
+  SUBMITTED
+  APPROVED
+  REJECTED
+  ON_HOLD
 }
 
 model User {
-  Id           Int      @id @default(autoincrement()) @map("Id")
-  Username     String   @unique @map("Username")
-  PasswordHash String   @map("PasswordHash")
-  Role         Role     @default(USER) @map("Role")
-  CreatedAt    DateTime @default(now()) @map("CreatedAt")
-  UpdatedAt    DateTime @updatedAt @map("UpdatedAt")
+  Id           Int          @id @default(autoincrement()) @map("Id")
+  Username     String       @unique @map("Username")
+  PasswordHash String       @map("PasswordHash")
+  Role         Role         @default(USER) @map("Role")
+  CreatedAt    DateTime     @default(now()) @map("CreatedAt")
+  UpdatedAt    DateTime     @updatedAt @map("UpdatedAt")
   Application  Application?
 
   @@map("User")
 }
 
 model Application {
-  Id            Int       @id @default(autoincrement()) @map("Id")
-  UserId        Int       @unique @map("UserId")
-  Status        ApplicationStatus @default(NEW) @map("Status")
-  PassportNo    String?   @map("PassportNo")
-  VisaNo        String?   @map("VisaNo")
-  IssueDate     DateTime? @map("IssueDate")
-  ExpiryDate    DateTime? @map("ExpiryDate")
-  ApplicantName String?   @map("ApplicantName")
-  DOB           DateTime? @map("DOB")
-  Nationality   String?   @map("Nationality")
-  ContactEmail  String?   @map("ContactEmail")
-  ContactPhone  String?   @map("ContactPhone")
-  AddressLine1  String?   @map("AddressLine1")
-  AddressLine2  String?   @map("AddressLine2")
-  City          String?   @map("City")
-  State         String?   @map("State")
-  PostalCode    String?   @map("PostalCode")
-  Notes         String?   @db.Text @map("Notes")
-  CreatedAt     DateTime  @default(now()) @map("CreatedAt")
-  UpdatedAt     DateTime  @updatedAt @map("UpdatedAt")
-  User          User      @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  Id                        Int               @id @default(autoincrement()) @map("Id")
+  UserId                    Int               @unique @map("UserId")
+  Status                    ApplicationStatus @default(NEW) @map("Status")
+  CreatedAt                 DateTime          @default(now()) @map("CreatedAt")
+  UpdatedAt                 DateTime          @updatedAt @map("UpdatedAt")
+  User                      User              @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  // form 1
+  TravelPurpose             String?
+  SpecificPurpose           String?
+  // form-2
+  LastName                  String?
+  BirthName                 String
+  FirstName                 String?
+  Gender                    String?
+  DOB                       DateTime?         @map("DOB")
+  POB                       String?           @map("POB")
+  Address                   String?           @map("AddressLine1")
+  Phone                     Int?              @map("Phone")
+  MaritalStatus             String?
+  FathersFirstName          String?
+  MothersFirstName          String?
+  Email                     String?
+  // form 3
+  TravelDocumentType        String?
+  DocumentNumber            String?
+  POITD                     String?
+  IssueDate                 DateTime?         @map("IssueDate")
+  ExpiryDate                DateTime?         @map("ExpiryDate")
+  // form 4
+  ArrivalDate               DateTime?         @map("ArrivalDate")
+  DepartureDate             DateTime?         @map("DepartureDate")
+  HostName                  String?
+  HostPhone                 Int?
+  HostAddress               String?
+  HostEmail                 String?
+  Municipality              String?
+  Settlement                String?
+  Street                    String?
+  houseNumber               String?
+  // form 5
+  FacePhoto                 String?
+  DocumentFirstPage         String?
+  InvitationLetter          String?
+  CertificateOfRegistration String?
+  EmploymentContract        String?
+  ExtractFrom               String?
+  Diploma                   String
+  Additional1               String
+  Additional2               String
 
   @@map("Application")
 }

@@ -35,21 +35,29 @@ const Step1Form = () => {
   const [selectedPurpose, setSelectedPurpose] = useState("employment");
   return (
     <div>
-      <Select>
-        <SelectTrigger>
-          <SelectValue placeholder="Select" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Select</SelectLabel>
-            <SelectItem value="Employment">Employment</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <h1 className="mt-35 text-[34px] text-default font-bold mb-14">
+        Travel purpose
+      </h1>
+      <div>
+        <h2 className="text-sm font-medium text-foreground mb-2">
+          Travel purpose *
+        </h2>
+        <Select name="travelPurpose">
+          <SelectTrigger>
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Select</SelectLabel>
+              <SelectItem value="Employment">Employment</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
       <h1 className="mt-35 text-[34px] text-default font-bold mb-14">
         More specific travel purpose:
       </h1>

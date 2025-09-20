@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Check } from "lucide-react";
-import Step1Form from "@/components/forms/Step1Form";
-import Step2Form from "@/components/forms/Step2Form";
-import { useMe } from "@/hooks/useMe";
-import Step3Form from "@/components/forms/Step3Form";
-import Step4Form from "@/components/forms/Step4Form";
-import Step5Form from "@/components/forms/Step5Form";
-import Step6Form from "@/components/forms/Step6Form";
 
 const steps = [
   { id: 1, title: "Travel purpose" },
@@ -23,11 +25,8 @@ const steps = [
   { id: 6, title: "Fees" },
 ];
 
-export default function VisaD() {
+const VisaC = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const { me } = useMe();
-
-  console.log("me", me);
 
   const nextStep = () => {
     if (currentStep < steps.length) {
@@ -46,7 +45,6 @@ export default function VisaD() {
       setCurrentStep(stepNumber);
     }
   };
-
   return (
     <div className="max-w-screen-xl mx-auto px-5 pt-10 pb-27.5">
       <h1 className="text-default text-5xl text-center font-bold mb-20">
@@ -96,12 +94,31 @@ export default function VisaD() {
       </div>
 
       <div className="md:px-20">
-        {currentStep === 1 && <Step1Form />}
-        {currentStep === 2 && <Step2Form />}
-        {currentStep === 3 && <Step3Form />}
-        {currentStep === 4 && <Step4Form />}
-        {currentStep === 5 && <Step5Form />}
-        {currentStep === 6 && <Step6Form />}
+        <div>
+          <h1 className="mt-35 text-[34px] text-default font-bold mb-14">
+            Travel purpose
+          </h1>
+          <div>
+            <h2 className="text-sm font-medium text-foreground mb-2">
+              Travel purpose *
+            </h2>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Select</SelectLabel>
+                  <SelectItem value="Employment">Employment</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
         <p className="mt-25 mb-15 text-sm text-default">
           All fields marked with * are mandatory
         </p>
@@ -121,6 +138,7 @@ export default function VisaD() {
             onClick={nextStep}
             // disabled={currentStep === steps.length}
             className="h-[44px] ms-auto font-bold"
+            disabled
           >
             Next step
           </Button>
@@ -128,4 +146,6 @@ export default function VisaD() {
       </div>
     </div>
   );
-}
+};
+
+export default VisaC;

@@ -5,7 +5,7 @@ import Link from "next/link";
 const Support = () => {
   return (
     <div className="bg-[#cdd7e7] py-20">
-      <div className="container px-5 mx-auto sm:flex items-center justify-center gap-20">
+      <div className="max-w-screen-xl px-5 mx-auto sm:flex items-center justify-center gap-20">
         <div className="mb-6 sm:mb-0">
           <h3 className="text-[28px] text-blue-600/70 font-bold">Support</h3>
           <svg

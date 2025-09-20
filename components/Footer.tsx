@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div>
       <div className="bg-primary h-10"></div>
-      <div className="container px-5 pb-12 mx-auto">
+      <div className="max-w-screen-xl px-5 pb-12 mx-auto">
         <div className="flex items-start gap-4">
           <Image src={logo} alt="logo2" width={60} />
           <div className="mt-6">

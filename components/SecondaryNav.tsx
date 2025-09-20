@@ -3,8 +3,8 @@ import React from "react";
 
 const SecondaryNav = () => {
   return (
-    <div className="h-[52px] bg-primary items-center justify-center hidden sm:flex">
-      <div className="container mx-auto px-5 h-full">
+    <div className="h-[52px] bg-primary hidden sm:block">
+      <div className="max-w-screen-xl mx-auto px-5 h-full">
         <div className="lg:w-5/6 h-full ms-auto border-l border-gray-400 flex items-center justify-between">
           <ul className="sm:flex h-full">
             <li className="h-full">
@@ -18,7 +18,7 @@ const SecondaryNav = () => {
             <li className="h-full">
               <Link
                 className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/"
+                href="/visa-c"
               >
                 Visa C
               </Link>
@@ -34,7 +34,7 @@ const SecondaryNav = () => {
             <li className="h-full">
               <Link
                 className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/"
+                href="/my-request"
               >
                 My request
               </Link>

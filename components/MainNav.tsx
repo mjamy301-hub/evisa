@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 const MainNav = () => {
   return (
-    <div className="h-[77px] bg-primary flex items-center justify-center border-b-2 border-white">
-      <div className="container mx-auto flex items-center justify-between sm:px-5">
+    <div className="h-[77px] bg-primary border-b-2 border-white">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between sm:px-5">
         <div className="flex items-center border-r-2 border-white pe-10">
           <Image src={flag} alt="" className="me-8" />
           <Image src={logo} alt="" />
