@@ -1,4 +1,6 @@
+import AddUserForm from "@/components/AddUserForm";
 import { Button } from "@/components/ui/button";
+import UsersTable from "@/components/UsersTable";
 import Link from "next/link";
 import React from "react";
 
@@ -54,6 +56,8 @@ const MyRequest = () => {
           </div>
         </div>
       </div>
+      <AddUserForm />
+      <UsersTable />
     </div>
   );
 };
