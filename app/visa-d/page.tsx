@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import Step1Form from "@/components/forms/Step1Form";
 import Step2Form from "@/components/forms/Step2Form";
+import { useMe } from "@/hooks/useMe";
 
 const steps = [
   { id: 1, title: "Travel purpose" },
@@ -20,6 +21,9 @@ const steps = [
 
 export default function VisaD() {
   const [currentStep, setCurrentStep] = useState(1);
+  const { me } = useMe();
+
+  console.log("me", me);
 
   const nextStep = () => {
     if (currentStep < steps.length) {
