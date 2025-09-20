@@ -14,11 +14,10 @@ const MainNav = () => {
   const handleLogout = async () => {
     const res = await fetch("/api/auth/logout", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     });
-    const data = await res.json();
-    console.log(data);
-    if (data.success) {
+
+    if (res.ok) {
       window.location.reload();
     }
   };
@@ -30,15 +29,7 @@ const MainNav = () => {
           <Image src={flag} alt="" className="me-8" />
           <Image src={logo} alt="" />
         </div>
-        {!me?.Id && (
-          <Link
-            href="/login"
-            className={`text-blue-500 h-[77px] w-[160px] bg-white cursor-pointer items-center justify-center hover:bg-white/95 transition-[background] duration-200`}
-          >
-            <span className={`${!me?.Id ? "flex" : "hidden"}`}>{me?.Id}</span>
-          </Link>
-        )}
-        {me?.Id && (
+        {me ? (
           <div className="relative">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -57,6 +48,13 @@ const MainNav = () => {
               Log out
             </button>
           </div>
+        ) : (
+          <Link
+            href="/login"
+            className="text-blue-500 h-[77px] w-[160px] bg-white cursor-pointer flex items-center justify-center hover:bg-white/95 transition-[background] duration-200"
+          >
+            Log in
+          </Link>
         )}
       </div>
     </div>
