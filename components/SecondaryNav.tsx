@@ -1,44 +1,56 @@
+"use client";
+
+import { useMe } from "@/hooks/useMe";
+import { Role } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 
 const SecondaryNav = () => {
+  const { me } = useMe();
+
   return (
     <div className="h-[52px] bg-primary hidden sm:block">
       <div className="max-w-screen-xl mx-auto px-5 h-full">
         <div className="lg:w-5/6 h-full ms-auto border-l border-gray-400 flex items-center justify-between">
           <ul className="sm:flex h-full">
-            <li className="h-full">
-              <Link
-                className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/"
-              >
-                Home page
-              </Link>
-            </li>
-            <li className="h-full">
-              <Link
-                className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/visa-c"
-              >
-                Visa C
-              </Link>
-            </li>
-            <li className="h-full">
-              <Link
-                className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/visa-d"
-              >
-                Visa D
-              </Link>
-            </li>
-            <li className="h-full">
-              <Link
-                className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                href="/my-request"
-              >
-                My request
-              </Link>
-            </li>
+            {me && (
+              <>
+                <li className="h-full">
+                  <Link
+                    className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                    href="/"
+                  >
+                    Home page
+                  </Link>
+                </li>
+                <li className="h-full">
+                  <Link
+                    className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                    href="/visa-c"
+                  >
+                    Visa C
+                  </Link>
+                </li>
+                {me.Role === Role.USER && (
+                  <li className="h-full">
+                    <Link
+                      className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                      href={`/visa-d/${me.Application?.Id}`}
+                    >
+                      Visa D
+                    </Link>
+                  </li>
+                )}
+                <li className="h-full">
+                  <Link
+                    className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                    href="/my-request"
+                  >
+                    My request
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
           <button className="text-white/80 flex items-center gap-2 text-xs font-normal flex-nowrap text-nowrap px-3">
             ЋИР LAT ENG

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { login } from "@/lib/auth";
-import { loginSchema } from "@/lib/validation";
 import { formatErrors } from "@/utils/formatError";
+import { loginSchema } from "@/lib/validation/auth";
 
 export async function POST(req: Request) {
   const body = await req.json();

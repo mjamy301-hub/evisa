@@ -12,7 +12,10 @@ export async function getCurrentUser() {
     select: {
       Id: true,
       Username: true,
-      Role: true
+      Role: true,
+      Application: {
+        select: { Id: true, Status: true }
+      }
     }
   });
 
