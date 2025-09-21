@@ -1,20 +1,19 @@
+"use client";
+
 import AvailableService from "@/components/AvailableService";
-import Footer from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import LoadMe from "@/components/LoadMe";
-import MainNav from "@/components/MainNav";
-import SecondaryNav from "@/components/SecondaryNav";
 import Service from "@/components/Service";
 import Support from "@/components/Support";
 import Yellow from "@/components/Yellow";
-import Image from "next/image";
+import { useMe } from "@/hooks/useMe";
 
 export default function Home() {
+  const { me } = useMe();
   return (
     <div>
       <Hero />
-      <Service />
-      {/* <AvailableService /> */}
+      {me?.Id ? <AvailableService /> : <Service />}
       <Yellow />
       <Support />
       <LoadMe />

@@ -1,36 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-];
+import { useEffect, useState } from "react";
 
 export default function UsersTable() {
+  const [users, setUsers] = useState<any>([]);
+  console.log(users);
+  useEffect(() => {
+    fetch("/api/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data.data.items))
+      .catch((err) => console.error(err));
+  }, []);
   return (
     <Table className="mb-20">
       <TableHeader>
@@ -41,11 +38,23 @@ export default function UsersTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
+        {users.map((user: any) => (
+          <TableRow key={user.Id}>
+            <TableCell className="font-medium">{user.Username}</TableCell>
+            <TableCell>
+              <Select name="Status" defaultValue={user.Application.Status}>
+                <SelectTrigger className="w-[300px]">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Country</SelectLabel>
+                    <SelectItem value="NEW">NEW</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </TableCell>
+            <TableCell>{user.email}</TableCell>
           </TableRow>
         ))}
       </TableBody>

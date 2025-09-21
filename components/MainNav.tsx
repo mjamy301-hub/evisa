@@ -11,10 +11,12 @@ const MainNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { me } = useMe();
 
+  console.log(me);
+
   const handleLogout = async () => {
     const res = await fetch("/api/auth/logout", {
       method: "POST",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     });
 
     if (res.ok) {

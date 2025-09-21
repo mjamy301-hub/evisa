@@ -28,20 +28,20 @@ enum ApplicationStatus {
 }
 
 model User {
-  Id           Int          @id @default(autoincrement()) 
+  Id           Int          @id @default(autoincrement())
   Name         String?
-  Username     String       @unique 
-  PasswordHash String       
+  Username     String       @unique
+  PasswordHash String
   Role         Role         @default(USER)
-  CreatedAt    DateTime     @default(now()) 
-  UpdatedAt    DateTime     @default(now()) @updatedAt 
+  CreatedAt    DateTime     @default(now())
+  UpdatedAt    DateTime     @default(now()) @updatedAt
   Application  Application?
 
   @@map("User")
 }
 
 model Application {
-  Id                        Int               @id @default(autoincrement()) 
+  Id                        Int               @id @default(autoincrement())
   UserId                    Int               @unique
   Status                    ApplicationStatus @default(NEW)
   // form 1
@@ -52,13 +52,13 @@ model Application {
   BirthName                 String?
   FirstName                 String?
   Gender                    String?
-  DOB                       String?         
-  POB                       String?           
+  DOB                       String?
+  POB                       String?
   Country                   String?           @default("Bangladesh")
-  Address                   String?           
+  Address                   String?
   Phone                     Int?
-  PassportIssueCountry      String?           @default("Bangladesh")        
-  OriginalCitizenship       String?           @default("Bangladesh")        
+  PassportIssueCountry      String?           @default("Bangladesh")
+  OriginalCitizenship       String?           @default("Bangladesh")
   MaritalStatus             String?
   FathersFirstName          String?
   MothersFirstName          String?
@@ -67,11 +67,11 @@ model Application {
   TravelDocumentType        String?
   DocumentNumber            String?
   POITD                     String?
-  IssueDate                 String?        
-  ExpiryDate                String?         
+  IssueDate                 String?
+  ExpiryDate                String?
   // form 4
-  ArrivalDate               String?         
-  DepartureDate             String?         
+  ArrivalDate               String?
+  DepartureDate             String?
   HostName                  String?
   HostPhone                 Int?
   HostAddress               String?
@@ -90,7 +90,7 @@ model Application {
   Diploma                   String?
   Additional1               String?
   Additional2               String?
-  CreatedAt                 DateTime          @default(now()) 
+  CreatedAt                 DateTime          @default(now())
   UpdatedAt                 DateTime          @default(now()) @updatedAt
   User                      User              @relation(fields: [UserId], references: [Id], onDelete: Cascade)
 

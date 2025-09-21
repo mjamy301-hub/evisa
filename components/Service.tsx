@@ -28,13 +28,13 @@ export default function Service() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="#">
+                  <Link href="/login">
                     <Button size="lg" className="h-[44px] font-bold">
                       Login
                     </Button>
                   </Link>
                   <Link
-                    href="#"
+                    href="/login"
                     className="text-blue-600/80 font-bold underline mt-2 ms-8"
                   >
                     Register an account
