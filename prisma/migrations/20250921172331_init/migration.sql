@@ -2,13 +2,12 @@
 CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
-CREATE TYPE "public"."ApplicationStatus" AS ENUM ('NEW', 'IN_PROGRESS', 'SUBMITTED', 'APPROVED', 'REJECTED', 'ON_HOLD');
+CREATE TYPE "public"."ApplicationStatus" AS ENUM ('REQUEST_SUBMITTED', 'DRAFT_REQUEST', 'PROCESSING', 'APPROVED');
 
 -- CreateTable
 CREATE TABLE "public"."User" (
     "Id" SERIAL NOT NULL,
-    "Name" TEXT,
-    "Username" TEXT NOT NULL,
+    "Email" TEXT NOT NULL,
     "PasswordHash" TEXT NOT NULL,
     "Role" "public"."Role" NOT NULL DEFAULT 'USER',
     "CreatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,7 +20,7 @@ CREATE TABLE "public"."User" (
 CREATE TABLE "public"."Application" (
     "Id" SERIAL NOT NULL,
     "UserId" INTEGER NOT NULL,
-    "Status" "public"."ApplicationStatus" NOT NULL DEFAULT 'NEW',
+    "Status" "public"."ApplicationStatus" NOT NULL DEFAULT 'REQUEST_SUBMITTED',
     "TravelPurpose" TEXT,
     "SpecificPurpose" TEXT,
     "LastName" TEXT,
@@ -70,7 +69,7 @@ CREATE TABLE "public"."Application" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_Username_key" ON "public"."User"("Username");
+CREATE UNIQUE INDEX "User_Email_key" ON "public"."User"("Email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Application_UserId_key" ON "public"."Application"("UserId");

@@ -5,7 +5,7 @@ import useSWR from "swr";
 export type Me = Prisma.UserGetPayload<{
   select: {
     Id: true;
-    Username: true;
+    Email: true;
     Role: true;
     Application: {
       select: {
@@ -18,22 +18,17 @@ export type Me = Prisma.UserGetPayload<{
 
 type Api<T> = { success: true; data: T } | { success: false };
 
-const fetcher = (url: string) =>
-  fetch(url, { cache: "no-store" }).then((r) => r.json());
+const fetcher = (url: string) => fetch(url, { cache: "no-store" }).then((r) => r.json());
 
 export function useMe() {
-  const { data, error, isLoading, mutate } = useSWR<Api<Me>>(
-    "/api/auth/me",
-    fetcher,
-    {
-      shouldRetryOnError: false,
-    }
-  );
+  const { data, error, isLoading, mutate } = useSWR<Api<Me>>("/api/auth/me", fetcher, {
+    shouldRetryOnError: false
+  });
 
   return {
     me: data?.success ? data.data : null,
     loading: isLoading,
     error,
-    refreshMe: () => mutate(),
+    refreshMe: () => mutate()
   };
 }
