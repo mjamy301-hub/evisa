@@ -22,8 +22,16 @@ const AddUserForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
+
     const data = await res.json();
-    console.log(data);
+
+    if (!res.ok) {
+      console.log("Error occurs");
+    }
+
+    if (res.ok) {
+      window.location.reload();
+    }
   };
 
   return (
@@ -31,8 +39,8 @@ const AddUserForm = () => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 sm:max-w-sm mb-10"
     >
-      <Input onChange={handleChange} name="username" />
-      <Input onChange={handleChange} name="password" />
+      <Input onChange={handleChange} name="Username" />
+      <Input onChange={handleChange} name="Password" />
       <Button type="submit">Create</Button>
     </form>
   );

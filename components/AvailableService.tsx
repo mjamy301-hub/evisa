@@ -26,7 +26,7 @@ export default function AvailableService() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="#">
+                  <Link href="visa-c">
                     <Button size="lg" className="h-[44px]">
                       Start application
                     </Button>
@@ -49,7 +49,7 @@ export default function AvailableService() {
                 </p>
 
                 <div className="mt-6">
-                  <Link href="#">
+                  <Link href="/visa-d">
                     <Button size="lg" className="h-[44px]">
                       Start application
                     </Button>

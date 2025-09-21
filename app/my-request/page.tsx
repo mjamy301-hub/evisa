@@ -1,10 +1,15 @@
+"use client";
+
 import AddUserForm from "@/components/AddUserForm";
 import { Button } from "@/components/ui/button";
 import UsersTable from "@/components/UsersTable";
+import { useMe } from "@/hooks/useMe";
 import Link from "next/link";
 import React from "react";
 
 const MyRequest = () => {
+  const { me } = useMe();
+  console.log(me);
   return (
     <div className="max-w-screen-xl mx-auto px-5 sm:px-12">
       <h1 className="text-center text-5xl font-bold py-10 text-default">
@@ -48,7 +53,7 @@ const MyRequest = () => {
             <h4 className="font-semibold text-default text-nowrap">400934</h4>
           </div>
           <div className="p-4.5">
-            <Link href="/visa-d">
+            <Link href={`/visa-d/${me?.Application?.Id}`}>
               <Button className="h-[44px] font-bold">
                 Open <br /> Request
               </Button>
