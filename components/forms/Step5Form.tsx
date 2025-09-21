@@ -7,12 +7,9 @@ import Link from "next/link";
 const Step5Form = () => {
   return (
     <div>
-      <h1 className="mt-35 text-[34px] text-default font-bold mb-6">
-        Documents
-      </h1>
+      <h1 className="mt-35 text-[34px] text-default font-bold mb-6">Documents</h1>
       <p className="mb-14">
-        Maximum 1 file per document. The total size of all uploaded documents
-        must not exceed 5MB.
+        Maximum 1 file per document. The total size of all uploaded documents must not exceed 5MB.
       </p>
       <div className="w-50 h-50 mb-8">
         <Image src={profile} alt="profile" className="w-full h-full" />
@@ -31,23 +28,11 @@ const Step5Form = () => {
         required
         className="mb-3"
       />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium mb-6 block"
-      >
+      <Link href="#!" className="text-blue-500 hover:underline font-medium mb-6 block">
         Download document
       </Link>
-      <UploadField
-        label="Invitation letter"
-        placeholder="Select"
-        accept=".pdf"
-        required
-        className="mb-3"
-      />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium block mb-6"
-      >
+      <UploadField label="Invitation letter" placeholder="Select" accept=".pdf" required className="mb-3" />
+      <Link href="#!" className="text-blue-500 hover:underline font-medium block mb-6">
         Download document
       </Link>
       <UploadField
@@ -57,10 +42,7 @@ const Step5Form = () => {
         required
         className="mb-3"
       />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium block mb-6"
-      >
+      <Link href="#!" className="text-blue-500 hover:underline font-medium block mb-6">
         Download document
       </Link>
       <UploadField
@@ -70,10 +52,7 @@ const Step5Form = () => {
         required
         className="mb-3"
       />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium block mb-6"
-      >
+      <Link href="#!" className="text-blue-500 hover:underline font-medium block mb-6">
         Download document
       </Link>
       <UploadField
@@ -83,10 +62,7 @@ const Step5Form = () => {
         required
         className="mb-3"
       />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium block mb-6"
-      >
+      <Link href="#!" className="text-blue-500 hover:underline font-medium block mb-6">
         Download document
       </Link>
       <UploadField
@@ -96,10 +72,7 @@ const Step5Form = () => {
         required
         className="mb-3"
       />
-      <Link
-        href="#!"
-        className="text-blue-500 hover:underline font-medium block mb-6"
-      >
+      <Link href="#!" className="text-blue-500 hover:underline font-medium block mb-6">
         Download document
       </Link>
       <UploadField
@@ -117,8 +90,8 @@ const Step5Form = () => {
         className="mb-6"
       />
       <p className="mt-20 sm:max-w-xl">
-        Diplomatic and consular representation office may additionally request
-        the supplementation of documents that have not been attached.
+        Diplomatic and consular representation office may additionally request the supplementation of documents that
+        have not been attached.
       </p>
     </div>
   );

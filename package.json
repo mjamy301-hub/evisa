@@ -12,8 +12,9 @@
     "lint": "eslint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate deploy",
-    "db:push": "prisma db push",
-    "db:seed": "prisma db seed"
+    "prisma:push": "prisma db push",
+    "prisma:seed": "prisma db seed",
+    "prisma:reset": "prims db reset"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",
