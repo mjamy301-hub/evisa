@@ -20,7 +20,8 @@ async function main() {
     data: {
       Username: username,
       PasswordHash: hash,
-      Role: Role.ADMIN
+      Role: Role.ADMIN,
+      Name: "Admin"
     }
   });
 

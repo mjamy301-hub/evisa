@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
-import { applicationPatchSchema } from "@/lib/validation";
 import { checkPermission } from "@/lib/rbac";
 import { formatErrors } from "@/utils/formatError";
+import { applicationPatchSchema } from "@/lib/validation/application";
 
-export async function GET(_req: Request, { params }: { params: { id: string } }) {
+export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSession();
   if (!session)
     return NextResponse.json(
       { success: false, error: { code: "UNAUTHORIZED", message: "Login required" } },
       { status: 401 }
     );
-  const app = await prisma.application.findUnique({ where: { Id: Number(params.id) } });
+  const id = (await params).id;
+  const app = await prisma.application.findUnique({ where: { Id: Number(id) } });
   if (!app)
     return NextResponse.json(
       { success: false, error: { code: "NOT_FOUND", message: "Application not found" } },

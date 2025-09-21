@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { createUserSchema } from "@/lib/validation";
 import bcrypt from "bcryptjs";
 import { getSession } from "@/lib/auth";
 import { checkPermission } from "@/lib/rbac";
 import { Role } from "@prisma/client";
 import { formatErrors } from "@/utils/formatError";
+import { createUserSchema } from "@/lib/validation/user";
 
 export async function GET(req: Request) {
   const session = await getSession();

@@ -28,36 +28,37 @@ enum ApplicationStatus {
 }
 
 model User {
-  Id           Int          @id @default(autoincrement()) @map("Id")
-  Username     String       @unique @map("Username")
-  PasswordHash String       @map("PasswordHash")
-  Role         Role         @default(USER) @map("Role")
-  CreatedAt    DateTime     @default(now()) @map("CreatedAt")
-  UpdatedAt    DateTime     @updatedAt @map("UpdatedAt")
+  Id           Int          @id @default(autoincrement()) 
+  Name         String?
+  Username     String       @unique 
+  PasswordHash String       
+  Role         Role         @default(USER)
+  CreatedAt    DateTime     @default(now()) 
+  UpdatedAt    DateTime     @default(now()) @updatedAt 
   Application  Application?
 
   @@map("User")
 }
 
 model Application {
-  Id                        Int               @id @default(autoincrement()) @map("Id")
-  UserId                    Int               @unique @map("UserId")
-  Status                    ApplicationStatus @default(NEW) @map("Status")
-  CreatedAt                 DateTime          @default(now()) @map("CreatedAt")
-  UpdatedAt                 DateTime          @updatedAt @map("UpdatedAt")
-  User                      User              @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  Id                        Int               @id @default(autoincrement()) 
+  UserId                    Int               @unique
+  Status                    ApplicationStatus @default(NEW)
   // form 1
   TravelPurpose             String?
   SpecificPurpose           String?
   // form-2
   LastName                  String?
-  BirthName                 String
+  BirthName                 String?
   FirstName                 String?
   Gender                    String?
-  DOB                       DateTime?         @map("DOB")
-  POB                       String?           @map("POB")
-  Address                   String?           @map("AddressLine1")
-  Phone                     Int?              @map("Phone")
+  DOB                       String?         
+  POB                       String?           
+  Country                   String?           @default("Bangladesh")
+  Address                   String?           
+  Phone                     Int?
+  PassportIssueCountry      String?           @default("Bangladesh")        
+  OriginalCitizenship       String?           @default("Bangladesh")        
   MaritalStatus             String?
   FathersFirstName          String?
   MothersFirstName          String?
@@ -66,11 +67,11 @@ model Application {
   TravelDocumentType        String?
   DocumentNumber            String?
   POITD                     String?
-  IssueDate                 DateTime?         @map("IssueDate")
-  ExpiryDate                DateTime?         @map("ExpiryDate")
+  IssueDate                 String?        
+  ExpiryDate                String?         
   // form 4
-  ArrivalDate               DateTime?         @map("ArrivalDate")
-  DepartureDate             DateTime?         @map("DepartureDate")
+  ArrivalDate               String?         
+  DepartureDate             String?         
   HostName                  String?
   HostPhone                 Int?
   HostAddress               String?
@@ -86,9 +87,12 @@ model Application {
   CertificateOfRegistration String?
   EmploymentContract        String?
   ExtractFrom               String?
-  Diploma                   String
-  Additional1               String
-  Additional2               String
+  Diploma                   String?
+  Additional1               String?
+  Additional2               String?
+  CreatedAt                 DateTime          @default(now()) 
+  UpdatedAt                 DateTime          @default(now()) @updatedAt
+  User                      User              @relation(fields: [UserId], references: [Id], onDelete: Cascade)
 
   @@map("Application")
 }

@@ -45,5 +45,7 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/applications", "/applications/:path*", "/users", "/users/:path*"]
+  matcher: [
+    "/((?!api|_next/static|_next/image|_next/data|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|avif|mp4|webm|css|js|map|txt|woff2?|ttf|eot)).*)"
+  ]
 };
