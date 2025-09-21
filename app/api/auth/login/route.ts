@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const formatted = formatErrors(parsed.error);
     return NextResponse.json({ success: false, error: { code: "BAD_REQUEST", ...formatted } }, { status: 400 });
   }
-  const session = await login(parsed.data.username, parsed.data.password);
+  const session = await login(parsed.data.Email, parsed.data.Password);
   if ("error" in session)
     return NextResponse.json(
       { success: false, error: { code: "INVALID_CREDENTIALS", ...session.error } },

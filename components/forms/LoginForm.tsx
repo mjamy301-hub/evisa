@@ -8,11 +8,11 @@ import clsx from "clsx";
 import { useMe } from "@/hooks/useMe";
 
 const LoginForm = () => {
-  const [username, setU] = useState("");
+  const [email, setU] = useState("");
   const [password, setP] = useState("");
   const [error, setError] = useState({
-    username: "",
-    password: ""
+    Email: "",
+    Password: ""
   });
   const [passwordShow, setPasswordShow] = useState(false);
   const router = useRouter();
@@ -22,14 +22,14 @@ const LoginForm = () => {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError({
-      username: "",
-      password: ""
+      Email: "",
+      Password: ""
     });
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ Email: email, Password: password })
     });
     const data = await res.json();
 
@@ -47,20 +47,20 @@ const LoginForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <div className="mb-4">
-        <label htmlFor="username" className="text-sm font-bold text-primary block mb-1">
-          Username:
+        <label htmlFor="email" className="text-sm font-bold text-primary block mb-1">
+          Email:
         </label>
         <p className="text-xs font-medium text-primary">(Email address used during registration)</p>
         <div className="relative after:absolute after:h-[3px] after:bg-[#c9dadf] after:left-[3px] after:right-[3px] after:-bottom-[3px]">
           <input
             className="bg-white h-[50px] px-4 text-primary font-medium border border-primary w-full focus:ring-0 focus:outline-0"
-            id="username"
-            value={username}
+            id="email"
+            value={email}
             onChange={(e) => setU(e.target.value)}
             required
           />
         </div>
-        {error.username && <p className="text-xs text-red-600">{error.username}</p>}
+        {error.Email && <p className="text-xs text-red-600">{error.Email}</p>}
       </div>
       <div className="mb-10">
         <label htmlFor="password" className="text-sm font-bold text-primary block mb-1">
@@ -90,7 +90,7 @@ const LoginForm = () => {
             SHOW
           </span>
         </div>
-        {error.password && <p className="text-xs text-red-600">{error.password}</p>}
+        {error.Password && <p className="text-xs text-red-600">{error.Password}</p>}
       </div>
       <button
         type="submit"

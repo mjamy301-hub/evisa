@@ -11,12 +11,10 @@ const MainNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { me } = useMe();
 
-  console.log(me);
-
   const handleLogout = async () => {
     const res = await fetch("/api/auth/logout", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     });
 
     if (res.ok) {
@@ -37,7 +35,7 @@ const MainNav = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-default h-[77px] w-[160px] bg-white cursor-pointer flex items-center justify-center hover:bg-white/95 transition-[background] duration-200 px-4 gap-2"
             >
-              <p className="flex-1 text-nowrap truncate">{me?.Username}</p>
+              <p className="flex-1 text-nowrap truncate">{me?.Email}</p>
               <UserCircleIcon className="w-7 h-7" />
             </button>
             <button

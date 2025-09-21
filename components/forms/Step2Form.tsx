@@ -23,7 +23,7 @@ const Step2Form = ({
 }: {
   form: Partial<Application>;
   setForm: Dispatch<SetStateAction<Partial<Application>>>;
-  error: object;
+  error: Partial<Application>;
 }) => {
   const { me } = useMe();
 
@@ -239,7 +239,7 @@ const Step2Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">Email address: *</h2>
-            <Input name="Email" value={form.Email ?? ""} onChange={handleChange} disabled={me?.Role !== Role.ADMIN} />
+            <Input name="Email" value={form.Email ?? ""} disabled />
           </div>
         </div>
       </div>

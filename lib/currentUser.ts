@@ -11,7 +11,7 @@ export async function getCurrentUser() {
     where: { Id: idNum },
     select: {
       Id: true,
-      Username: true,
+      Email: true,
       Role: true,
       Application: {
         select: { Id: true, Status: true }

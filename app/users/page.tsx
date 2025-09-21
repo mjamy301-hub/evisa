@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 type Item = {
   Id: string;
-  Username: string;
+  Email: string;
   Role: "ADMIN" | "USER";
   CreatedAt: string;
   Application?: { Id: string; Status: string };
@@ -31,7 +31,7 @@ export default function UsersPage() {
     const res = await fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: nu, password: pw })
+      body: JSON.stringify({ Email: nu, Password: pw })
     });
     if (res.ok) {
       setShow(false);
@@ -45,14 +45,14 @@ export default function UsersPage() {
     <div>
       <h1>Users</h1>
       <div style={{ display: "flex", gap: 8 }}>
-        <input placeholder="Search username" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input placeholder="Search email" value={q} onChange={(e) => setQ(e.target.value)} />
         <button onClick={load}>Search</button>
         <button onClick={() => setShow(true)}>Add User</button>
       </div>
       <table style={{ width: "100%", marginTop: 12 }}>
         <thead>
           <tr>
-            <th>Username</th>
+            <th>Email</th>
             <th>Role</th>
             <th>Status</th>
           </tr>
@@ -64,7 +64,7 @@ export default function UsersPage() {
               onClick={() => u.Application && router.push(`/applications/${u.Application.Id}`)}
               style={{ cursor: "pointer" }}
             >
-              <td>{u.Username}</td>
+              <td>{u.Email}</td>
               <td>{u.Role}</td>
               <td>{u.Application?.Status ?? "-"}</td>
             </tr>
@@ -75,7 +75,7 @@ export default function UsersPage() {
       {show && (
         <div style={{ border: "1px solid #ddd", padding: 12, marginTop: 12 }}>
           <h3>Add User</h3>
-          <input placeholder="Username" value={nu} onChange={(e) => setNu(e.target.value)} />
+          <input placeholder="Email" value={nu} onChange={(e) => setNu(e.target.value)} />
           <input placeholder="Password" type="password" value={pw} onChange={(e) => setPw(e.target.value)} />
           <div style={{ display: "flex", gap: 8 }}>
             <button onClick={createUser}>Create</button>
