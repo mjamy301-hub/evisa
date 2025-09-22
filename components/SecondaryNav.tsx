@@ -41,14 +41,16 @@ const SecondaryNav = () => {
                     </Link>
                   </li>
                 )}
-                <li className="h-full">
-                  <Link
-                    className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
-                    href="/my-request"
-                  >
-                    My request
-                  </Link>
-                </li>
+                {me.Role === Role.USER && (
+                  <li className="h-full">
+                    <Link
+                      className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                      href="/my-request"
+                    >
+                      My request
+                    </Link>
+                  </li>
+                )}
               </>
             )}
           </ul>

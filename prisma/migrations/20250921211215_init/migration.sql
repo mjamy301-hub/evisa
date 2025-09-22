@@ -4,6 +4,9 @@ CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'USER');
 -- CreateEnum
 CREATE TYPE "public"."ApplicationStatus" AS ENUM ('REQUEST_SUBMITTED', 'DRAFT_REQUEST', 'PROCESSING', 'APPROVED');
 
+-- CreateEnum
+CREATE TYPE "public"."FileStatus" AS ENUM ('INACTIVE', 'ACTIVE');
+
 -- CreateTable
 CREATE TABLE "public"."User" (
     "Id" SERIAL NOT NULL,
@@ -68,11 +71,38 @@ CREATE TABLE "public"."Application" (
     CONSTRAINT "Application_pkey" PRIMARY KEY ("Id")
 );
 
+-- CreateTable
+CREATE TABLE "public"."File" (
+    "Id" SERIAL NOT NULL,
+    "UserId" INTEGER,
+    "Status" "public"."FileStatus" NOT NULL DEFAULT 'INACTIVE',
+    "FileableId" INTEGER,
+    "FileableType" TEXT,
+    "Collection" TEXT,
+    "Identifier" TEXT,
+    "Path" TEXT NOT NULL,
+    "Extension" TEXT NOT NULL,
+    "FileName" TEXT,
+    "CreatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "UpdatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "File_pkey" PRIMARY KEY ("Id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_Email_key" ON "public"."User"("Email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Application_UserId_key" ON "public"."Application"("UserId");
+
+-- CreateIndex
+CREATE INDEX "IDX_files_fileable" ON "public"."File"("FileableType", "FileableId", "Identifier");
+
+-- CreateIndex
+CREATE INDEX "IDX_files_coll_ident" ON "public"."File"("FileableType", "FileableId", "Collection");
+
+-- CreateIndex
+CREATE INDEX "File_FileableType_FileableId_Status_idx" ON "public"."File"("FileableType", "FileableId", "Status");
 
 -- AddForeignKey
 ALTER TABLE "public"."Application" ADD CONSTRAINT "Application_UserId_fkey" FOREIGN KEY ("UserId") REFERENCES "public"."User"("Id") ON DELETE CASCADE ON UPDATE CASCADE;
