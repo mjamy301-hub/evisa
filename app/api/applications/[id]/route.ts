@@ -40,7 +40,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   return NextResponse.json({ success: true, data: app });
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSession();
   if (!session)
     return NextResponse.json(
@@ -59,6 +59,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     const formatted = formatErrors(parsed.error);
     return NextResponse.json({ success: false, error: { code: "BAD_REQUEST", ...formatted } }, { status: 400 });
   }
-  const updated = await prisma.application.update({ where: { Id: Number(params.id) }, data: parsed.data });
+  const id = (await params).id;
+  const updated = await prisma.application.update({ where: { Id: Number(id) }, data: parsed.data });
   return NextResponse.json({ success: true, data: updated });
 }

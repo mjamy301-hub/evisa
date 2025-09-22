@@ -10,7 +10,9 @@ export type Permission =
   | "users:read:all"
   | "users:create"
   | "users:update:all"
-  | "users:delete:all";
+  | "users:delete:all"
+  | "file:read:all"
+  | "file:create";
 
 const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   ADMIN: [
@@ -22,9 +24,11 @@ const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     "users:read:all",
     "users:create",
     "users:update:all",
-    "users:delete:all"
+    "users:delete:all",
+    "file:create",
+    "file:read:all"
   ],
-  USER: ["applications:read:own"]
+  USER: ["applications:read:own", "file:read:all"]
 };
 
 export function hasPermission(role: Role, permission: Permission): boolean {
@@ -49,10 +53,10 @@ export interface RouteAccess {
 export const ROUTE_ACCESS: RouteAccess[] = [
   { path: "/", roles: [] },
   { path: "/login", roles: [] },
-  { path: "/applications/:id", roles: [Role.ADMIN, Role.USER] },
-  { path: "/applications", roles: [Role.USER] },
-  { path: "/users", roles: [Role.ADMIN] },
-  { path: "/users:id", roles: [Role.ADMIN] }
+  { path: "/visa-c", roles: [Role.ADMIN, Role.USER] },
+  { path: "/visa-d/:id", roles: [Role.ADMIN, Role.USER] },
+  { path: "/my-request", roles: [Role.USER] },
+  { path: "/users", roles: [Role.ADMIN] }
 ];
 
 function patternToRegex(pattern: string): RegExp {

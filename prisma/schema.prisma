@@ -25,6 +25,11 @@ enum ApplicationStatus {
   APPROVED
 }
 
+enum FileStatus {
+  INACTIVE
+  ACTIVE
+}
+
 model User {
   Id           Int          @id @default(autoincrement())
   Email     String       @unique
@@ -92,4 +97,26 @@ model Application {
   User                      User              @relation(fields: [UserId], references: [Id], onDelete: Cascade)
 
   @@map("Application")
+}
+
+model File {
+  Id            Int         @id @default(autoincrement())                    
+  UserId        Int?                                       
+  Status        FileStatus  @default(INACTIVE)            
+  FileableId    Int?                                      
+  FileableType  String?                                    
+  Collection    String?                                   
+  Identifier    String?                                    
+  Path          String                                    
+  Extension     String                                    
+  FileName      String?                                   
+  CreatedAt     DateTime    @default(now())               
+  UpdatedAt     DateTime    @default(now()) @updatedAt                   
+
+  // Your original indexes
+  @@index([FileableType, FileableId, Identifier],   map: "IDX_files_fileable")
+  @@index([FileableType, FileableId, Collection],   map: "IDX_files_coll_ident")
+
+  // Helpful for common reads (optional)
+  @@index([FileableType, FileableId, Status])
 }
