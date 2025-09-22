@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/components/ui/select";
 import { Check } from "lucide-react";
 
@@ -17,12 +17,12 @@ const steps = [
   { id: 1, title: "Travel purpose" },
   {
     id: 2,
-    title: "Personal data",
+    title: "Personal data"
   },
   { id: 3, title: "Travel documents" },
   { id: 4, title: "Visa information" },
   { id: 5, title: "Add documents" },
-  { id: 6, title: "Fees" },
+  { id: 6, title: "Fees" }
 ];
 
 const VisaC = () => {
@@ -40,16 +40,9 @@ const VisaC = () => {
     }
   };
 
-  const goToStep = (stepNumber: number) => {
-    if (stepNumber <= currentStep || stepNumber === currentStep + 1) {
-      setCurrentStep(stepNumber);
-    }
-  };
   return (
     <div className="max-w-screen-xl mx-auto px-5 pt-10 pb-27.5">
-      <h1 className="text-default text-5xl text-center font-bold mb-20">
-        Application for visa type D
-      </h1>
+      <h1 className="text-default text-5xl text-center font-bold mb-20">Application for visa type D</h1>
       <div>
         <div className="flex items-center justify-between mb-10 max-w-2xl mx-auto relative sm:left-10">
           {steps.map((step, index) => (
@@ -68,15 +61,9 @@ const VisaC = () => {
                       : "bg-white border-4 border-[#4a90e2]"
                   }`}
                 >
-                  {step.id < currentStep && (
-                    <Check className="w-4 text-blue-500" />
-                  )}
+                  {step.id < currentStep && <Check className="w-4 text-blue-500" />}
                 </div>
-                {index < steps.length - 1 && (
-                  <div
-                    className={`flex-1 h-1 transition-all duration-200 bg-[#4a90e2]`}
-                  />
-                )}
+                {index < steps.length - 1 && <div className={`flex-1 h-1 transition-all duration-200 bg-[#4a90e2]`} />}
               </div>
               {/* Step Label */}
               <div className="mt-4 h-20 hidden sm:block">
@@ -95,13 +82,9 @@ const VisaC = () => {
 
       <div className="md:px-20">
         <div>
-          <h1 className="mt-35 text-[34px] text-default font-bold mb-14">
-            Travel purpose
-          </h1>
+          <h1 className="mt-35 text-[34px] text-default font-bold mb-14">Travel purpose</h1>
           <div>
-            <h2 className="text-sm font-medium text-foreground mb-2">
-              Travel purpose *
-            </h2>
+            <h2 className="text-sm font-medium text-foreground mb-2">Travel purpose *</h2>
             <Select>
               <SelectTrigger>
                 <SelectValue placeholder="Select" />
@@ -119,17 +102,11 @@ const VisaC = () => {
             </Select>
           </div>
         </div>
-        <p className="mt-25 mb-15 text-sm text-default">
-          All fields marked with * are mandatory
-        </p>
+        <p className="mt-25 mb-15 text-sm text-default">All fields marked with * are mandatory</p>
         {/* Navigation Buttons */}
         <div className="flex justify-between items-center">
           {currentStep > 1 && (
-            <Button
-              onClick={prevStep}
-              disabled={currentStep === 1}
-              className="h-[44px] font-bold"
-            >
+            <Button onClick={prevStep} disabled={currentStep === 1} className="h-[44px] font-bold">
               Previous step
             </Button>
           )}

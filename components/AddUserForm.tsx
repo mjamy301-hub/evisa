@@ -23,8 +23,6 @@ const AddUserForm = () => {
       body: JSON.stringify(formData)
     });
 
-    const data = await res.json();
-
     if (!res.ok) {
       console.log("Error occurs");
     }

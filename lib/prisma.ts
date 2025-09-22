@@ -20,5 +20,6 @@ export const prisma = base.$extends({
 });
 
 if (process.env.NODE_ENV !== "production") {
+  // @ts-expect-error prisma global is only in dev mode
   globalForPrisma.prisma = prisma;
 }
