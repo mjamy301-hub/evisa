@@ -51,6 +51,16 @@ const SecondaryNav = () => {
                     </Link>
                   </li>
                 )}
+                {me.Role === Role.ADMIN && (
+                  <li className="h-full">
+                    <Link
+                      className="text-white h-full hover:bg-white hover:text-default px-6 font-semibold flex items-center justify-center border-r border-gray-400 text-nowrap"
+                      href="/users"
+                    >
+                      Users
+                    </Link>
+                  </li>
+                )}
               </>
             )}
           </ul>

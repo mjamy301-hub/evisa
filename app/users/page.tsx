@@ -62,7 +62,7 @@ export default function UsersPage() {
           {items.map((u) => (
             <tr
               key={u.Id}
-              onClick={() => u.Application && router.push(`/applications/${u.Application.Id}`)}
+              onClick={() => u.Application && router.push(`/visa-d/${u.Application.Id}`)}
               style={{ cursor: "pointer" }}
             >
               <td>{u.Email}</td>
