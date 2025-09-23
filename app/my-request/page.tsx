@@ -9,6 +9,7 @@ import React, { useEffect } from "react";
 
 const MyRequest = () => {
   const { me } = useMe();
+  console.log(me);
   useEffect(() => {
     const getUser = async () => {
       const res = await fetch("/api/users");

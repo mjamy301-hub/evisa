@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { useMe } from "@/hooks/useMe";
 
 export default function AvailableService() {
+  const { me } = useMe();
   return (
     <section className="relative">
       <div className="mx-auto max-w-4xl px-6 pt-17.5 pb-20">
@@ -49,7 +51,7 @@ export default function AvailableService() {
                 </p>
 
                 <div className="mt-6">
-                  <Link href="/visa-d">
+                  <Link href={`/visa-d/${me?.Application?.Id}`}>
                     <Button size="lg" className="h-[44px]">
                       Start application
                     </Button>

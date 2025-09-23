@@ -14,9 +14,9 @@ export async function getCurrentUser() {
       Email: true,
       Role: true,
       Application: {
-        select: { Id: true, Status: true }
-      }
-    }
+        select: { Id: true, Status: true, FirstName: true, LastName: true },
+      },
+    },
   });
 
   if (!user) {
