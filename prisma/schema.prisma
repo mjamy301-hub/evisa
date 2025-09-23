@@ -46,6 +46,7 @@ model Application {
   Id                        Int               @id @default(autoincrement())
   UserId                    Int               @unique
   Status                    ApplicationStatus @default(REQUEST_SUBMITTED)
+  RequestNumber             String?
   // form 1
   TravelPurpose             String?
   SpecificPurpose           String?

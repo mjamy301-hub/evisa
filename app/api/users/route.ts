@@ -78,8 +78,17 @@ export async function POST(req: Request) {
   const user = await prisma.user.create({
     data: { Email: parsed.data.Email, PasswordHash: hash, Role: Role.USER }
   });
+
+  const requestNumber = Math.floor(Math.random() * 10000000)
+    .toString()
+    .padStart(7, "0");
   await prisma.application.create({
-    data: { UserId: user.Id, Status: ApplicationStatus.REQUEST_SUBMITTED, Email: parsed.data.Email }
+    data: {
+      UserId: user.Id,
+      Status: ApplicationStatus.REQUEST_SUBMITTED,
+      Email: parsed.data.Email,
+      RequestNumber: requestNumber
+    }
   });
   return NextResponse.json({ success: true, data: { id: user.Id } }, { status: 201 });
 }

@@ -11,6 +11,10 @@ export type Me = Prisma.UserGetPayload<{
       select: {
         Id: true;
         Status: true;
+        RequestNumber: true;
+        DocumentNumber: true;
+        FirstName: true;
+        LastName: true;
       };
     };
   };
