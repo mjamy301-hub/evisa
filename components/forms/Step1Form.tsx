@@ -134,6 +134,7 @@ const Step1Form = ({
                 <input
                   type="radio"
                   name="purpose"
+                  disabled={me?.Role !== Role.ADMIN}
                   value={purpose.id}
                   checked={form.SpecificPurpose === purpose.id}
                   onChange={(e) => {

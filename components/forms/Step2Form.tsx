@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "../ui/checkbox";
 import { Application, Role } from "@prisma/client";
@@ -19,7 +19,7 @@ import { useMe } from "@/hooks/useMe";
 const Step2Form = ({
   form,
   setForm,
-  error
+  error,
 }: {
   form: Partial<Application>;
   setForm: Dispatch<SetStateAction<Partial<Application>>>;
@@ -39,26 +39,35 @@ const Step2Form = ({
 
     setForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   return (
     <div className="sm:max-w-4xl mx-auto">
-      <h1 className="mt-35 text-[34px] text-default font-bold mb-14">Personal information</h1>
+      <h1 className="mt-35 text-[34px] text-default font-bold mb-14">
+        Personal information
+      </h1>
       <div className="grid sm:grid-cols-2 sm:gap-15 md:gap-0">
         <div className="w-7/8 md:w-4/7">
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Users last name: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Users last name: *
+            </h2>
             <Input
               name="LastName"
               value={form.LastName ?? ""}
               onChange={handleChange}
               disabled={me?.Role !== Role.ADMIN}
             />
+            {error.LastName && (
+              <p className="text-red-500 text-sm">{error.LastName}</p>
+            )}
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Last name at birth:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Last name at birth:
+            </h2>
             <div className="relative">
               <Input
                 name="BirthName"
@@ -67,16 +76,24 @@ const Step2Form = ({
                 disabled={me?.Role !== Role.ADMIN}
               />
               <InfoIcon />
+              {error.BirthName && (
+                <p className="text-red-500 text-sm">{error.BirthName}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">User first name: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              User first name: *
+            </h2>
             <Input
               name="FirstName"
               value={form.FirstName ?? ""}
               onChange={handleChange}
               disabled={me?.Role !== Role.ADMIN}
             />
+            {error.FirstName && (
+              <p className="text-red-500 text-sm">{error.FirstName}</p>
+            )}
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">Gender: *</h2>
@@ -84,7 +101,9 @@ const Step2Form = ({
               <Select
                 name="Gender"
                 defaultValue={form.Gender ?? ""}
-                onValueChange={(value) => handleChange({ target: { name: "Gender", value } })}
+                onValueChange={(value) =>
+                  handleChange({ target: { name: "Gender", value } })
+                }
                 disabled={me?.Role !== Role.ADMIN}
               >
                 <SelectTrigger className="w-full">
@@ -99,10 +118,15 @@ const Step2Form = ({
                 </SelectContent>
               </Select>
               <InfoIcon />
+              {error.Gender && (
+                <p className="text-red-500 text-sm">{error.Gender}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Date of birth: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Date of birth: *
+            </h2>
             <Input
               name="DOB"
               type="date"
@@ -110,9 +134,12 @@ const Step2Form = ({
               onChange={handleChange}
               disabled={me?.Role !== Role.ADMIN}
             />
+            {error.DOB && <p className="text-red-500 text-sm">{error.DOB}</p>}
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Country of birth: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Country of birth: *
+            </h2>
             <div className="relative">
               <Select name="Country" defaultValue={form.Country ?? ""} disabled>
                 <SelectTrigger className="w-full">
@@ -129,16 +156,26 @@ const Step2Form = ({
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Place of birth: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Place of birth: *
+            </h2>
             <div className="relative">
-              <Input name="POB" value={form.POB ?? ""} onChange={handleChange} disabled={me?.Role !== Role.ADMIN} />
+              <Input
+                name="POB"
+                value={form.POB ?? ""}
+                onChange={handleChange}
+                disabled={me?.Role !== Role.ADMIN}
+              />
               <InfoIcon />
+              {error.POB && <p className="text-red-500 text-sm">{error.POB}</p>}
             </div>
           </div>
         </div>
         <div className="w-6/7 md:w-4/7">
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Address: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Address: *
+            </h2>
             <div className="relative">
               <Input
                 name="Address"
@@ -147,19 +184,38 @@ const Step2Form = ({
                 disabled={me?.Role !== Role.ADMIN}
               />
               <InfoIcon />
+              {error.Address && (
+                <p className="text-red-500 text-sm">{error.Address}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Telephone: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Telephone: *
+            </h2>
             <div className="relative">
-              <Input name="Phone" value={form.Phone ?? ""} onChange={handleChange} disabled={me?.Role !== Role.ADMIN} />
+              <Input
+                name="Phone"
+                value={form.Phone ?? ""}
+                onChange={handleChange}
+                disabled={me?.Role !== Role.ADMIN}
+              />
               <InfoIcon />
+              {error.Phone && (
+                <p className="text-red-500 text-sm">{error.Phone}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Passport issuing country: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Passport issuing country: *
+            </h2>
             <div className="relative">
-              <Select name="PassportIssueCountry" defaultValue={form.PassportIssueCountry ?? "Bangladesh"} disabled>
+              <Select
+                name="PassportIssueCountry"
+                defaultValue={form.PassportIssueCountry ?? "Bangladesh"}
+                disabled
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -174,9 +230,15 @@ const Step2Form = ({
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Original citizenship: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Original citizenship: *
+            </h2>
             <div className="relative">
-              <Select name="OriginalCitizenship" defaultValue={form.OriginalCitizenship ?? "Bangladesh"} disabled>
+              <Select
+                name="OriginalCitizenship"
+                defaultValue={form.OriginalCitizenship ?? "Bangladesh"}
+                disabled
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -191,12 +253,16 @@ const Step2Form = ({
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Marital status: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Marital status: *
+            </h2>
             <div className="relative">
               <Select
                 name="MaritalStatus"
                 defaultValue={form.MaritalStatus ?? ""}
-                onValueChange={(value) => handleChange({ target: { name: "MaritalStatus", value } })}
+                onValueChange={(value) =>
+                  handleChange({ target: { name: "MaritalStatus", value } })
+                }
                 disabled={me?.Role !== Role.ADMIN}
               >
                 <SelectTrigger className="w-full">
@@ -211,10 +277,15 @@ const Step2Form = ({
                 </SelectContent>
               </Select>
               <InfoIcon />
+              {error.MaritalStatus && (
+                <p className="text-red-500 text-sm">{error.MaritalStatus}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Father&apos;s first name:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Father&apos;s first name:
+            </h2>
             <div className="relative">
               <Input
                 name="FathersFirstName"
@@ -223,10 +294,15 @@ const Step2Form = ({
                 disabled={me?.Role !== Role.ADMIN}
               />
               <InfoIcon />
+              {error.FathersFirstName && (
+                <p className="text-red-500 text-sm">{error.FathersFirstName}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Mother&apos;s first name:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Mother&apos;s first name:
+            </h2>
             <div className="relative">
               <Input
                 name="MothersFirstName"
@@ -235,53 +311,89 @@ const Step2Form = ({
                 disabled={me?.Role !== Role.ADMIN}
               />
               <InfoIcon />
+              {error.MothersFirstName && (
+                <p className="text-red-500 text-sm">{error.MothersFirstName}</p>
+              )}
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Email address: *</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Email address: *
+            </h2>
             <Input name="Email" value={form.Email ?? ""} disabled />
+            {error.Email && (
+              <p className="text-red-500 text-sm">{error.Email}</p>
+            )}
           </div>
         </div>
       </div>
-      <h1 className="mt-25 text-[34px] text-default font-bold mb-14">Family data</h1>
+      <h1 className="mt-25 text-[34px] text-default font-bold mb-14">
+        Family data
+      </h1>
       <div className="flex items-center gap-5 mb-6">
-        <Checkbox className="h-6 w-6 border-default disabled:border-default disabled:cursor-pointer" disabled />
-        <label htmlFor="vehicle1" className="font-semibold text-sm cursor-pointer">
+        <Checkbox
+          className="h-6 w-6 border-default disabled:border-default disabled:cursor-pointer"
+          disabled
+        />
+        <label
+          htmlFor="vehicle1"
+          className="font-semibold text-sm cursor-pointer"
+        >
           Do you have a family?
         </label>
       </div>
       <div className="flex items-center gap-5">
-        <Checkbox className="h-6 w-6 border-default disabled:border-default disabled:cursor-pointer" disabled />
-        <label htmlFor="vehicle2" className="font-semibold text-sm cursor-pointer">
+        <Checkbox
+          className="h-6 w-6 border-default disabled:border-default disabled:cursor-pointer"
+          disabled
+        />
+        <label
+          htmlFor="vehicle2"
+          className="font-semibold text-sm cursor-pointer"
+        >
           Do you have children?
         </label>
       </div>
-      <h1 className="mt-25 text-[34px] text-default font-bold mb-14">Employment information</h1>
+      <h1 className="mt-25 text-[34px] text-default font-bold mb-14">
+        Employment information
+      </h1>
       <div className="grid sm:grid-cols-2 sm:gap-15 md:gap-0">
         <div className="w-7/8 md:w-4/7">
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Current profession:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Current profession:
+            </h2>
             <div className="relative">
-              <Input name="currentProfession" disabled onChange={handleChange} />
+              <Input
+                name="currentProfession"
+                disabled
+                onChange={handleChange}
+              />
               <InfoIcon />
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Employer&apos;s company:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Employer&apos;s company:
+            </h2>
             <div className="relative">
               <Input name="company" disabled onChange={handleChange} />
               <InfoIcon />
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Employer&apos;s address:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Employer&apos;s address:
+            </h2>
             <div className="relative">
               <Input name="employeeAddress" disabled onChange={handleChange} />
               <InfoIcon />
             </div>
           </div>
           <div>
-            <h2 className="text-sm font-medium text-default mb-2">Employer&apos;s telephone number:</h2>
+            <h2 className="text-sm font-medium text-default mb-2">
+              Employer&apos;s telephone number:
+            </h2>
             <div className="relative">
               <Input name="employeePhone" disabled onChange={handleChange} />
               <InfoIcon />

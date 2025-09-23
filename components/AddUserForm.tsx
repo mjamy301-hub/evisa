@@ -10,7 +10,7 @@ const AddUserForm = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -20,7 +20,7 @@ const AddUserForm = () => {
     const res = await fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     });
 
     if (!res.ok) {
@@ -33,8 +33,13 @@ const AddUserForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:max-w-sm mb-10">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 sm:max-w-sm mb-10"
+    >
+      <label htmlFor="email">Email</label>
       <Input onChange={handleChange} name="Email" />
+      <label htmlFor="email">Password</label>
       <Input onChange={handleChange} name="Password" />
       <Button type="submit">Create</Button>
     </form>
