@@ -66,7 +66,7 @@ const Step5Form = () => {
       </div>
       <UploadField
         label="Face photo"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.FACE_PHOTO]?.FileName ?? "Select"}
         accept=".jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -76,7 +76,7 @@ const Step5Form = () => {
       />
       <UploadField
         label="The first page of the travel document/passport"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.PASSPORT]?.FileName ?? "Select"}
         accept=".pdf, .jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -95,7 +95,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="Invitation letter"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.INVITATION_LETTER]?.FileName ?? "Select"}
         accept=".pdf"
         required
         disabled={me?.Role === Role.USER}
@@ -114,7 +114,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="Certificate of registration of a legal entity, business association, sports association or entrepreneur"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.LEGAL_ENTRY]?.FileName ?? "Select"}
         accept=".pdf, .jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -133,7 +133,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="A proposal for an employment contract or other contract by which a right based on work is realized"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.EMPLOYMENT_CONTRACT]?.FileName ?? "Select"}
         accept=".pdf, .jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -152,7 +152,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="Extract from the rulebook on the organization and systematization of jobs, or if the employer has less than 10 employees, the employer's statement containing the name and description of the jobs, the type and degree of the required professional qualification, i.e. education and other special conditions for working on the jobs for the position"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.JOB_DOCUMENTS]?.FileName ?? "Select"}
         accept=".pdf, .jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -171,7 +171,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="Diploma, certificate, i.e. other public document on the acquired appropriate type and level of the required professional qualification, i.e. education and a certified translation of the same"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.DIPLOMA_CERTIFICATE]?.FileName ?? "Select"}
         accept=".pdf, .jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -190,7 +190,7 @@ const Step5Form = () => {
       </Link>
       <UploadField
         label="Additional document 1"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.ADDITIONAL_1]?.FileName ?? "Select"}
         accept=".jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}
@@ -200,7 +200,7 @@ const Step5Form = () => {
       />
       <UploadField
         label="Additional document 2"
-        placeholder="Select"
+        placeholder={uploaded[FileIdentifier.ADDITIONAL_2]?.FileName ?? "Select"}
         accept=".jpg, .jpeg, .png, .tiff"
         required
         disabled={me?.Role === Role.USER}

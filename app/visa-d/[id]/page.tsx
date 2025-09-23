@@ -44,6 +44,10 @@ export default function VisaD() {
     }
   };
 
+  const gotoStep = (step: number) => {
+    setCurrentStep(step);
+  };
+
   useEffect(() => {
     (async () => {
       const res = await fetch(`/api/applications/${params.id}`, {
@@ -101,17 +105,18 @@ export default function VisaD() {
                 {`${step.id}`}
               </p>
               <div className="flex items-center w-full h-12">
-                <div
-                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center transition-all duration-200 ${
+                <button
+                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer ${
                     step.id === currentStep
                       ? "bg-[#4a90e2] text-white w-[36px] h-[36px]"
                       : step.id < currentStep
                       ? "bg-[#253956] text-white"
                       : "bg-white border-4 border-[#4a90e2]"
                   }`}
+                  onClick={() => gotoStep(step.id)}
                 >
                   {step.id < currentStep && <Check className="w-4 text-blue-500" />}
-                </div>
+                </button>
                 {index < steps.length - 1 && <div className={`flex-1 h-1 transition-all duration-200 bg-[#4a90e2]`} />}
               </div>
               {/* Step Label */}
