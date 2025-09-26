@@ -12,6 +12,7 @@ import Step6Form from "@/components/forms/Step6Form";
 import { useParams } from "next/navigation";
 import { Application, Role } from "@prisma/client";
 import { useMe } from "@/hooks/useMe";
+import Link from "next/link";
 
 const steps = [
   { id: 1, title: "Travel purpose" },
@@ -42,10 +43,6 @@ export default function VisaD() {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
-  };
-
-  const gotoStep = (step: number) => {
-    setCurrentStep(step);
   };
 
   useEffect(() => {
@@ -108,14 +105,13 @@ export default function VisaD() {
               </p>
               <div className="flex items-center w-full h-12">
                 <button
-                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer ${
+                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center transition-all duration-200 ${
                     step.id === currentStep
                       ? "bg-[#4a90e2] text-white w-[36px] h-[36px]"
                       : step.id < currentStep
                       ? "bg-[#253956] text-white"
                       : "bg-white border-4 border-[#4a90e2]"
                   }`}
-                  onClick={() => gotoStep(step.id)}
                 >
                   {step.id < currentStep && (
                     <Check className="w-4 text-blue-500" />
@@ -155,28 +151,45 @@ export default function VisaD() {
         )}
         {currentStep === 5 && <Step5Form />}
         {currentStep === 6 && <Step6Form />}
-        <p className="mt-25 mb-15 text-sm text-default">
-          All fields marked with * are mandatory
-        </p>
-        {/* Navigation Buttons */}
-        <div className="flex justify-between items-center">
-          {currentStep > 1 && (
-            <Button
-              onClick={prevStep}
-              disabled={currentStep === 1}
-              className="h-[44px] font-bold"
-            >
-              Previous step
-            </Button>
-          )}
+        <div
+          className={`${
+            (currentStep === 3 || currentStep === 4) && "sm:max-w-4xl mx-auto"
+          }`}
+        >
+          <p className="mt-25 mb-15 text-sm text-default">
+            All fields marked with * are mandatory
+          </p>
+          {/* Navigation Buttons */}
+          <div className={`flex justify-between items-center`}>
+            {currentStep > 1 && (
+              <Button
+                onClick={prevStep}
+                disabled={currentStep === 1}
+                className="h-[44px] font-bold"
+              >
+                Previous step
+              </Button>
+            )}
 
-          <Button
-            onClick={handleUpdate}
-            // disabled={currentStep === steps.length}
-            className="h-[44px] ms-auto font-bold"
-          >
-            {currentStep === 6 ? "Proceed to payment gateway" : "Next step"}
-          </Button>
+            <Button
+              onClick={handleUpdate}
+              // disabled={currentStep === steps.length}
+              className={`h-[44px] ms-auto font-bold ${
+                currentStep === 6 && "hidden"
+              }`}
+            >
+              Next step
+            </Button>
+            <Link href="/my-request">
+              <Button
+                className={`h-[44px] ms-auto font-bold ${
+                  currentStep !== 6 && "hidden"
+                }`}
+              >
+                Proceed to payment gateway
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

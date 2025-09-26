@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "evisa.welcome to serbia",
+  title: "evisa.welcometoserbiagovrs",
   description: "Welcome to serbia",
 };
 
