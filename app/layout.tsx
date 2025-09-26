@@ -6,6 +6,7 @@ import SecondaryNav from "@/components/SecondaryNav";
 import Footer from "@/components/Footer";
 import { getCurrentUser } from "@/lib/currentUser";
 import { SWRProvider } from "@/providers/SWRProvider";
+import GlobalLoader from "./_components/GlobalLoader";
 
 const getMontserrat = Montserrat({
   variable: "--font-montserrat-sans",
@@ -37,6 +38,7 @@ export default async function RootLayout({
       <body
         className={`${getMontserrat.variable} ${geistMono.variable} antialiased`}
       >
+        <GlobalLoader />
         <MainNav />
         <SecondaryNav />
         <SWRProvider fallback={fallback}>{children}</SWRProvider>
