@@ -13,14 +13,17 @@ export async function GET(req: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Login required" }
+        error: { code: "UNAUTHORIZED", message: "Login required" },
       },
       { status: 401 }
     );
   try {
     checkPermission(session.role, "users:read:all");
   } catch {
-    return NextResponse.json({ success: false, error: { code: "FORBIDDEN", message: "Admin only" } }, { status: 403 });
+    return NextResponse.json(
+      { success: false, error: { code: "FORBIDDEN", message: "Admin only" } },
+      { status: 403 }
+    );
   }
 
   const { searchParams } = new URL(req.url);
@@ -28,25 +31,27 @@ export async function GET(req: Request) {
   const page = Number(searchParams.get("page") || "1");
   const pageSize = Number(searchParams.get("pageSize") || "20");
 
-  const where = search ? { Email: { contains: search, mode: "insensitive" as const } } : undefined;
+  const where = search
+    ? { Email: { contains: search, mode: "insensitive" as const } }
+    : undefined;
   const [items, total] = await Promise.all([
     prisma.user.findMany({
       where: {
         Role: {
-          not: Role.ADMIN
+          not: Role.ADMIN,
         },
-        ...where
+        ...where,
       },
       orderBy: { CreatedAt: "desc" },
       take: pageSize,
       skip: (page - 1) * pageSize,
-      include: { Application: true }
+      include: { Application: true },
     }),
-    prisma.user.count({ where })
+    prisma.user.count({ where }),
   ]);
   return NextResponse.json({
     success: true,
-    data: { items, total, page, pageSize }
+    data: { items, total, page, pageSize },
   });
 }
 
@@ -56,39 +61,48 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Login required" }
+        error: { code: "UNAUTHORIZED", message: "Login required" },
       },
       { status: 401 }
     );
   try {
     checkPermission(session.role, "users:create");
   } catch {
-    return NextResponse.json({ success: false, error: { code: "FORBIDDEN", message: "Admin only" } }, { status: 403 });
+    return NextResponse.json(
+      { success: false, error: { code: "FORBIDDEN", message: "Admin only" } },
+      { status: 403 }
+    );
   }
 
   const body = await req.json();
   const parsed = createUserSchema.safeParse(body);
   if (!parsed.success) {
     const formatted = formatErrors(parsed.error);
-    return NextResponse.json({ success: false, error: { code: "BAD_REQUEST", ...formatted } }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: { code: "BAD_REQUEST", ...formatted } },
+      { status: 400 }
+    );
   }
 
+  const { Email, Password, RequestNumber, VisId } = parsed.data;
   const saltRounds = Number(process.env.BCRYPT_SALT_ROUNDS || "12");
-  const hash = await bcrypt.hash(parsed.data.Password, saltRounds);
+  const hash = await bcrypt.hash(Password, saltRounds);
+
   const user = await prisma.user.create({
-    data: { Email: parsed.data.Email, PasswordHash: hash, Role: Role.USER }
+    data: { Email: Email, PasswordHash: hash, Role: Role.USER },
   });
 
-  const requestNumber = Math.floor(Math.random() * 10000000)
-    .toString()
-    .padStart(7, "0");
   await prisma.application.create({
     data: {
       UserId: user.Id,
       Status: ApplicationStatus.REQUEST_SUBMITTED,
       Email: parsed.data.Email,
-      RequestNumber: requestNumber
-    }
+      RequestNumber,
+      VisId,
+    },
   });
-  return NextResponse.json({ success: true, data: { id: user.Id } }, { status: 201 });
+  return NextResponse.json(
+    { success: true, data: { id: user.Id } },
+    { status: 201 }
+  );
 }

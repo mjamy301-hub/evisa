@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ApplicationStatus, User } from "@prisma/client";
+import { ApplicationStatus } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -45,6 +45,7 @@ export default function UsersTable() {
     <Table className="mb-20">
       <TableHeader>
         <TableRow>
+          <TableHead>Name</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Email</TableHead>
         </TableRow>
@@ -52,6 +53,7 @@ export default function UsersTable() {
       <TableBody>
         {users.map((user: any) => (
           <TableRow key={user.Id}>
+            <TableCell>{user.Application.LastName ?? ""}</TableCell>
             <TableCell>
               <Select
                 name="Status"
@@ -70,13 +72,13 @@ export default function UsersTable() {
                       Request submitted
                     </SelectItem>
                     <SelectItem value={ApplicationStatus.DRAFT_REQUEST}>
-                      Draft Request
+                      Draft request
                     </SelectItem>
                     <SelectItem value={ApplicationStatus.PROCESSING}>
-                      Processing
+                      Request processing
                     </SelectItem>
                     <SelectItem value={ApplicationStatus.APPROVED}>
-                      Approved
+                      Request approved
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>

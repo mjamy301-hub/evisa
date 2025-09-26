@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -32,7 +32,7 @@ enum FileStatus {
 
 model User {
   Id           Int          @id @default(autoincrement())
-  Email     String       @unique
+  Email        String       @unique
   PasswordHash String
   Role         Role         @default(USER)
   CreatedAt    DateTime     @default(now())
@@ -47,6 +47,7 @@ model Application {
   UserId                    Int               @unique
   Status                    ApplicationStatus @default(REQUEST_SUBMITTED)
   RequestNumber             String?
+  VisId                     String?
   // form 1
   TravelPurpose             String?
   SpecificPurpose           String?
@@ -101,23 +102,22 @@ model Application {
 }
 
 model File {
-  Id            Int         @id @default(autoincrement())                    
-  UserId        Int?                                       
-  Status        FileStatus  @default(INACTIVE)            
-  FileableId    Int?                                      
-  FileableType  String?                                    
-  Collection    String?                                   
-  Identifier    String?                                    
-  Path          String                                    
-  Extension     String                                    
-  FileName      String?                                   
-  CreatedAt     DateTime    @default(now())               
-  UpdatedAt     DateTime    @default(now()) @updatedAt                   
+  Id           Int        @id @default(autoincrement())
+  UserId       Int?
+  Status       FileStatus @default(INACTIVE)
+  FileableId   Int?
+  FileableType String?
+  Collection   String?
+  Identifier   String?
+  Path         String
+  Extension    String
+  FileName     String?
+  CreatedAt    DateTime   @default(now())
+  UpdatedAt    DateTime   @default(now()) @updatedAt
 
   // Your original indexes
-  @@index([FileableType, FileableId, Identifier],   map: "IDX_files_fileable")
-  @@index([FileableType, FileableId, Collection],   map: "IDX_files_coll_ident")
-
+  @@index([FileableType, FileableId, Identifier], map: "IDX_files_fileable")
+  @@index([FileableType, FileableId, Collection], map: "IDX_files_coll_ident")
   // Helpful for common reads (optional)
   @@index([FileableType, FileableId, Status])
 }

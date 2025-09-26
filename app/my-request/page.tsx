@@ -10,21 +10,31 @@ const MyRequest = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto px-5 sm:px-12">
-      <h1 className="text-center text-5xl font-bold py-10 text-default">List of previously sent requests</h1>
+      <h1 className="text-center text-5xl font-bold py-10 text-default">
+        List of previously sent requests
+      </h1>
       <div className="overflow-auto border-y border-gray-300 mt-10 mb-20">
         <div className="flex flex-nowrap justify-between">
           <div className="p-4.5">
-            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">Request number</h3>
-            <h4 className="font-semibold text-default text-nowrap">{me?.Application?.RequestNumber}</h4>
+            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">
+              Request number
+            </h3>
+            <h4 className="font-semibold text-default text-nowrap">
+              {me?.Application?.RequestNumber}
+            </h4>
           </div>
           <div className="p-4.5">
-            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">First and last name</h3>
+            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">
+              First and last name
+            </h3>
             <h4 className="font-semibold text-default text-nowrap">
               {me?.Application?.FirstName} {me?.Application?.LastName}
             </h4>
           </div>
           <div className="p-4.5">
-            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">Status</h3>
+            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">
+              Status
+            </h3>
             {me?.Application?.Status === "REQUEST_SUBMITTED" && (
               <span className="bg-[#4a90e2] text-sm text-white leading-[1.5] block font-medium min-w-[170px]">
                 Request submitted
@@ -36,23 +46,29 @@ const MyRequest = () => {
               </span>
             )}
             {me?.Application?.Status === "PROCESSING" && (
-              <span className="bg-purple-500 text-sm text-white leading-[1.5] block font-medium min-w-[170px]">
-                Processing
+              <span className="bg-[#4a90e2] text-sm text-white leading-[1.5] block font-medium min-w-[170px]">
+                Request processing
               </span>
             )}
             {me?.Application?.Status === "APPROVED" && (
-              <span className="bg-green-500 text-sm text-white leading-[1.5] block font-medium min-w-[170px]">
-                Approved
+              <span className="bg-[#017932] text-sm text-white leading-[1.5] block font-medium min-w-[170px]">
+                Request approved
               </span>
             )}
           </div>
           <div className="p-4.5">
-            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">Visa</h3>
+            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">
+              Visa
+            </h3>
             <h4 className="font-semibold text-default text-nowrap">Visa D</h4>
           </div>
           <div className="p-4.5">
-            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">Vis Id</h3>
-            <h4 className="font-semibold text-default text-nowrap">{me?.Application?.DocumentNumber}</h4>
+            <h3 className="text-[#a0a0a0] text-sm font-medium text-nowrap">
+              Vis Id
+            </h3>
+            <h4 className="font-semibold text-default text-nowrap">
+              {me?.Application?.VisId}
+            </h4>
           </div>
           <div className="p-4.5">
             <Link href={`/visa-d/${me?.Application?.Id}`}>

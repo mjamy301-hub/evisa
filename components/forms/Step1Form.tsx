@@ -52,11 +52,9 @@ const purposes = [
 const Step1Form = ({
   form,
   setForm,
-  error,
 }: {
   form: Partial<Application>;
   setForm: Dispatch<SetStateAction<Partial<Application>>>;
-  error: object;
 }) => {
   const [selectedPurpose, setSelectedPurpose] = useState("cooperation");
   const { me } = useMe();

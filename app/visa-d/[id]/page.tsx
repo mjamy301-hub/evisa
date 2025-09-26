@@ -143,9 +143,7 @@ export default function VisaD() {
       </div>
 
       <div className="md:px-20">
-        {currentStep === 1 && (
-          <Step1Form setForm={setForm} form={form} error={error} />
-        )}
+        {currentStep === 1 && <Step1Form setForm={setForm} form={form} />}
         {currentStep === 2 && (
           <Step2Form setForm={setForm} form={form} error={error} />
         )}

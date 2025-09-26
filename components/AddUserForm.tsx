@@ -3,6 +3,13 @@
 import React, { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import {
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const AddUserForm = () => {
   const [formData, setFormData] = useState({});
@@ -33,16 +40,35 @@ const AddUserForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 sm:max-w-sm mb-10"
-    >
-      <label htmlFor="email">Email</label>
-      <Input onChange={handleChange} name="Email" />
-      <label htmlFor="email">Password</label>
-      <Input onChange={handleChange} name="Password" />
-      <Button type="submit">Create</Button>
-    </form>
+    <DialogContent className="sm:max-w-[425px]">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:max-w-sm">
+        <DialogHeader>
+          <DialogTitle className="mb-4">Add user</DialogTitle>
+        </DialogHeader>
+        <label className="text-sm" htmlFor="email">
+          Email
+        </label>
+        <Input onChange={handleChange} name="Email" className="mb-3" />
+        <label className="text-sm" htmlFor="Password">
+          Password
+        </label>
+        <Input onChange={handleChange} name="Password" className="mb-3" />
+        <label className="text-sm" htmlFor="RequestNumber">
+          Request Number
+        </label>
+        <Input onChange={handleChange} name="RequestNumber" className="mb-3" />
+        <label className="text-sm" htmlFor="VisId">
+          Vis Id
+        </label>
+        <Input onChange={handleChange} name="VisId" className="mb-3" />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button type="submit">Create</Button>
+        </DialogFooter>
+      </form>
+    </DialogContent>
   );
 };
 

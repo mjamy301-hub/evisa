@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Application, Role } from "@prisma/client";
 import { useMe } from "@/hooks/useMe";
+import { ChevronDown } from "lucide-react";
 
 const Step4Form = ({
   form,
@@ -157,7 +158,7 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Border crossing: *
+              Border crossing:
             </h2>
             <div className="relative">
               <Select
@@ -238,7 +239,7 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Host&apos;s telephone number:
+              Host&apos;s telephone number: *
             </h2>
             <div className="relative">
               <Input
@@ -256,7 +257,7 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Host&apos;s address:
+              Host&apos;s address: *
             </h2>
             <div className="relative">
               <Input
@@ -273,7 +274,7 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Host&apos;s e-mail address:
+              Host&apos;s e-mail address: *
             </h2>
             <div className="relative">
               <Input
@@ -290,29 +291,18 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Municipality:
+              Municipality: *
             </h2>
-            <div className="relative">
-              <Select
+            <div className="relative input-select">
+              <Input
                 name="Municipality"
-                defaultValue={form.Municipality ?? ""}
-                onValueChange={(value) =>
-                  handleChange({ target: { name: "Municipality", value } })
-                }
+                value={form.Municipality ?? ""}
+                onChange={handleChange}
                 disabled={me?.Role !== Role.ADMIN}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select</SelectLabel>
-                    <SelectItem value="FUTOG">FUTOG</SelectItem>
-                    <SelectItem value="LEDINCI">LEDINCI</SelectItem>
-                    <SelectItem value="NOVI SAD">NOVI SAD</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              />
+              <div className="input-select-icon absolute top-1 right-1 px-2 flex items-center justify-center z-20 h-[80%] bg-white">
+                <ChevronDown className="w-4 opacity-30" />
+              </div>
               <InfoIcon />
               {error.Municipality && (
                 <p className="text-red-500 text-sm">{error.Municipality}</p>
@@ -321,29 +311,18 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              Settlement:
+              Settlement: *
             </h2>
-            <div className="relative">
-              <Select
+            <div className="relative input-select">
+              <Input
                 name="Settlement"
-                defaultValue={form.Settlement ?? ""}
-                onValueChange={(value) =>
-                  handleChange({ target: { name: "Settlement", value } })
-                }
+                value={form.Settlement ?? ""}
+                onChange={handleChange}
                 disabled={me?.Role !== Role.ADMIN}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select</SelectLabel>
-                    <SelectItem value="FUTOG">FUTOG</SelectItem>
-                    <SelectItem value="LEDINCI">LEDINCI</SelectItem>
-                    <SelectItem value="NOVI SAD">NOVI SAD</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              />
+              <div className="input-select-icon absolute top-1 right-1 px-2 flex items-center justify-center z-20 h-[80%] bg-white">
+                <ChevronDown className="w-4 opacity-30" />
+              </div>
               <InfoIcon />
               {error.Settlement && (
                 <p className="text-red-500 text-sm">{error.Settlement}</p>
@@ -353,29 +332,17 @@ const Step4Form = ({
         </div>
         <div className="w-7/8 md:w-4/7">
           <div className="mb-6">
-            <h2 className="text-sm font-medium text-default mb-2">Street:</h2>
-            <div className="relative">
-              <Select
+            <h2 className="text-sm font-medium text-default mb-2">Street: *</h2>
+            <div className="relative input-select">
+              <Input
                 name="Street"
-                defaultValue={form.Street ?? ""}
-                onValueChange={(value) =>
-                  handleChange({ target: { name: "Street", value } })
-                }
+                value={form.Street ?? ""}
+                onChange={handleChange}
                 disabled={me?.Role !== Role.ADMIN}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select</SelectLabel>
-                    <SelectItem value="1300 KAPLARA">1300 KAPLARA</SelectItem>
-                    <SelectItem value="9. MAJA">9. MAJA</SelectItem>
-                    <SelectItem value="9.MAJA">9.MAJA</SelectItem>
-                    <SelectItem value="HILANDARSKA">HILANDARSKA</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              />
+              <div className="input-select-icon absolute top-1 right-1 px-2 flex items-center justify-center z-20 h-[80%] bg-white">
+                <ChevronDown className="w-4 opacity-30" />
+              </div>
               <InfoIcon />
               {error.Street && (
                 <p className="text-red-500 text-sm">{error.Street}</p>
@@ -384,30 +351,18 @@ const Step4Form = ({
           </div>
           <div className="mb-6">
             <h2 className="text-sm font-medium text-default mb-2">
-              House number:
+              House number: *
             </h2>
-            <div className="relative">
-              <Select
+            <div className="relative input-select">
+              <Input
                 name="houseNumber"
-                defaultValue={form.houseNumber ?? ""}
-                onValueChange={(value) =>
-                  handleChange({ target: { name: "houseNumber", value } })
-                }
+                value={form.houseNumber ?? ""}
+                onChange={handleChange}
                 disabled={me?.Role !== Role.ADMIN}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select</SelectLabel>
-                    <SelectItem value="001">001</SelectItem>
-                    <SelectItem value="001A">001A</SelectItem>
-                    <SelectItem value="002">002</SelectItem>
-                    <SelectItem value="002A">002A</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              />
+              <div className="input-select-icon absolute top-1 right-1 px-2 flex items-center justify-center z-20 h-[80%] bg-white">
+                <ChevronDown className="w-4 opacity-30" />
+              </div>
               <InfoIcon />
               {error.houseNumber && (
                 <p className="text-red-500 text-sm">{error.houseNumber}</p>

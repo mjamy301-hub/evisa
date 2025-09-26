@@ -124,3 +124,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.input-select {
+  &:has(input[disabled]) {
+    .input-select-icon {
+      background-color: #ececec;
+    }
+  }
+}
